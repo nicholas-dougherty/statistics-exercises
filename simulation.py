@@ -21,7 +21,7 @@ die_2 = np.random.choice([1, 2, 3, 4, 5, 6], size = 10_000)
 
 (die_1 == die_2).mean()
 #  returns p of 0.164
-# -----------------------------------------------------------------
+#|-------------------------------------------------------------------------------------------------------|#
 # or
 n_trials = nrows = 10_000
 n_dice = ncols= 2
@@ -34,7 +34,7 @@ df = pd.DataFrame(rolls).apply(lambda x : x[0] == x[1] in x.values, axis=1)
 
 # gives the probability of rolling doubles >> 0.163
 df.mean()
-# ----------------------------------------------------------------
+#|-------------------------------------------------------------------------------------------------------|#
 # or 
 outcomes = [1,2,3,4,5,6]
 n_rows = 1_000_000 # 1 million trials
@@ -51,8 +51,9 @@ prob_doubles = len(doubles)/len(rolls)
 # returns p of 0.166672
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
-# 2. If you flip 8 coins, what is the probability of getting exactly 3 heads? What is the probability of getting more than 3 heads?
-
+#|-------------------------------------------------------------------------------------------------------|#
+# 2. If you flip 8 coins, what is the probability of getting exactly 3 heads? 
+# What is the probability of getting more than 3 heads?
 coin_outcomes = [1, 0]
 n_simulations = 100_000
 n_trials = 8 
@@ -66,9 +67,10 @@ p_morethan_3heads = (count_heads > 3).mean()
 # returns p more than 3 heads of 0.63873
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
+#|-------------------------------------------------------------------------------------------------------|#
 # 3. There are approximitely 3 web development cohorts for every 1 data science cohort at Codeup.
-#    Assuming that Codeup randomly selects an alumni to put on a billboard, what are the odds that the two
-#    billboards I drive past both have data science students on them?
+#    Assuming that Codeup randomly selects an alumni to put on a billboard, 
+#    what are the odds that the two billboards I drive past both have data science students on them?
 #
 #               Three Web Dev cohorts for every 1 Data Science cohort, which is a ratio of 3:1,
 #           or think of it this way:
@@ -83,9 +85,10 @@ data = np.random.random((n_rows, n_cols))
 # returns p of 0.062627
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
+#|-------------------------------------------------------------------------------------------------------|#
 # 4. Codeup students buy, on average, 3 poptart packages (+- 1.5) a day from the snack vending machine. 
-#    If on monday the machine is restocked with 17 poptart packages, how likely is it that I will be able to
-#    buy some poptarts on Friday afternoon?
+#    If on monday the machine is restocked with 17 poptart packages, how likely is it that 
+#    I will be able to buy some poptarts on Friday afternoon?
 #
 mu, sigma = 3, 1.5 #mean and std deviation
 n_rows = 10_0000
@@ -95,6 +98,7 @@ pops_bought = consumed.sum(axis =1)
 poptarts_on_fri = 17 - pops_bought
 (poptarts_on_fri >= 1).mean()
 # returns p of 0.6204
+#|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 # 5. Compare Heights
@@ -112,6 +116,7 @@ women = np.random.normal(mu_women, sigma, size=(10_000, 1))
 
 prob_woman_taller = (women > men).mean()
 # returns p of 0.2131
+#|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 # 6. When installing anaconda on a student's computer, there's a 1 in 250 chance that the download
@@ -137,7 +142,8 @@ successful_install = trials < p_success
 (successful_install.sum(axis=1)== 100).mean()
 # returns p of 0.6707
 #|-------------------------------------------------------------------------------------------------------|#
-# What is the probability that we observe an installation issue within the first 150 students that download anaconda?
+# What is the probability that we observe an installation issue within 
+# the first 150 students that download anaconda?
 p_fail = 0.004
 p_success = 0.996
 n_cols = 150
@@ -156,6 +162,7 @@ trials = np.random.random((n_rows, n_cols))
 success_install = trials < p_success
 (success_install.sum(axis=1) == 450).mean()
 #  returns p  of 0.1657
+#|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 # 7. There's a 70% chance on any given day that there will be at least one food truck at Travis Park. 
@@ -185,6 +192,7 @@ data = np.random.choice(outcomes, n_rows * n_cols, p = [p_notruck, p_truck]).res
 # returns p of 0.972958
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
+#|-------------------------------------------------------------------------------------------------------|#
 # 8. If 23 people are in the same room, what are the odds that two of them share a birthday?  
 
 #               365 days a year
@@ -211,7 +219,8 @@ classrooms = np.random.choice(outcomes, size = (n_simulations, n_trials))
 # a list of the length of the uniques for each instance for the full number of simulations by index, 
 # but only if the number of uniques is less than the number of students in the class
 
-list_twin_bdays =  [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1) if len(np.unique(classrooms[n])) < 23]
+list_twin_bdays = [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1)\
+                   if len(np.unique(classrooms[n])) < 23]
 
 # length of list of twin bdays is the number of times we had a class with shared bdays, 
 # divide that by total simulations
@@ -225,8 +234,12 @@ n_trials = 20
 n_simulations = 1_000_000
 
 classrooms = np.random.choice(outcomes, size = (n_simulations, n_trials))
-list_twin_bdays =  [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1) if len(np.unique(classrooms[n])) < 20]
+
+list_twin_bdays =  [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1)\
+                    if len(np.unique(classrooms[n])) < 20]
+
 prop_twins = len(list_twin_bdays) / n_simulations
+
 # returns p of 0.411709
 #|-------------------------------------------------------------------------------------------------------|#
 
@@ -236,9 +249,13 @@ n_trials = 40
 n_simulations = 1_000_000
 
 classrooms = np.random.choice(outcomes, size = (n_simulations, n_trials))
-list_twin_bdays =  [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1) if len(np.unique(classrooms[n])) < 40]
+list_twin_bdays =  [len(np.unique(classrooms[n])) for n in range(0, n_simulations - 1)\
+                    if len(np.unique(classrooms[n])) < 40]
+
 prop_twins = len(list_twin_bdays) / n_simulations
+
 #  returns p of 0.891755
+#|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 #|-------------------------------------------------------------------------------------------------------|#
 #        ▄▀▀▀█▀▀▄  ▄▀▀▄ ▄▄   ▄▀▀█▄▄▄▄     ▄▀▀▄ ▄▀▄  ▄▀▀█▄   ▄▀▀▀█▀▀▄  ▄▀▀▄▀▀▀▄  ▄▀▀█▀▄   ▄▀▀▄  ▄▀▄        #
@@ -249,3 +266,6 @@ prop_twins = len(list_twin_bdays) / n_simulations
 #       █          █   █     █    ▐      █    █    ▐   ▐   █         ▐     ▐   █       █  ▄▀  ▄▀          #
 #       ▐          ▐   ▐     ▐           ▐    ▐            ▐                   ▐       ▐ █    ▐           #
 #                                                                                          Simulation FIN #
+#|-------------------------------------------------------------------------------------------------------|#
+#|-------------------------------------------------------------------------------------------------------|#
+#|-------------------------------------------------------------------------------------------------------|#
