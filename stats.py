@@ -1,6 +1,41 @@
+#  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+# ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+# ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ 
+# ▐░▌               ▐░▌     ▐░▌       ▐░▌     ▐░▌     ▐░▌          
+# ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄ 
+# ▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░░▌
+#  ▀▀▀▀▀▀▀▀▀█░▌     ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌     ▐░▌      ▀▀▀▀▀▀▀▀▀█░▌
+#           ▐░▌     ▐░▌     ▐░▌       ▐░▌     ▐░▌               ▐░▌
+#  ▄▄▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░▌       ▐░▌     ▐░▌      ▄▄▄▄▄▄▄▄▄█░▌
+# ▐░░░░░░░░░░░▌     ▐░▌     ▐░▌       ▐░▌     ▐░▌     ▐░░░░░░░░░░░▌
+#  ▀▀▀▀▀▀▀▀▀▀▀       ▀       ▀         ▀       ▀       ▀▀▀▀▀▀▀▀▀▀▀ 
+#                                                                  
+# 
+#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+#############################################################################
+#An Overview of the Functions Contained Here:                               #
+#                           generate_random_value                           #
+#                            prob_of_value_discrete                         #
+#                             prob_of_value_continuous                      #
+#                              prob_less_than_value                         #
+#                               value_less_than_prob                        #
+#                                prob_greater_than_value                    #
+#                                 value_greater_than_prob                   #
+#                                  evaluate_hypothesis                      #
+#                                   chi2_test                               #
+#                                    correlation_test                       #
+#                                     equal_var_test                        #
+#                                      central_limit_theorem_test           #
+#                                       two_sample_ttest                    #
+#                                        anova_test                         #
+#############################################################################
+#----------------------------------------------------------------------------
+# Imports
 from scipy import stats
 import pandas as pd
-
+#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 ## PROBABILITY DISTRIBUTION FUNCTIONS
 
 probability_distribution = stats._distn_infrastructure.rv_frozen
@@ -15,7 +50,7 @@ def generate_random_value(distribution: probability_distribution = stats.randint
     '''
 
     return distribution.rvs(size)
-
+#----------------------------------------------------------------------------
 def prob_of_value_discrete(distribution: probability_distribution, value: int) -> float:
     '''
     Returns the probability that the distribution will randomly generate the given value, given
@@ -26,7 +61,7 @@ def prob_of_value_discrete(distribution: probability_distribution, value: int) -
     '''
 
     return distribution.pmf(value)
-
+#----------------------------------------------------------------------------
 def prob_of_value_continuous(distribution: probability_distribution, value: float) -> float:
     '''
     Returns the probability that the distribution will randomly generate the given value, given
@@ -37,7 +72,7 @@ def prob_of_value_continuous(distribution: probability_distribution, value: floa
     '''
 
     return distribution.pdf(value)
-
+#----------------------------------------------------------------------------
 def prob_less_than_value(distribution: probability_distribution, value: float) -> float:
     '''
     Returns the probability that the distribution will randomly generate a value less than
@@ -48,7 +83,7 @@ def prob_less_than_value(distribution: probability_distribution, value: float) -
     '''
 
     return distribution.cdf(value)
-
+#----------------------------------------------------------------------------
 def value_less_than_prob(distribution: probability_distribution, probability: float) -> float:
     '''
     Given the probability of generating a random value less than or equal to some value n,
@@ -59,7 +94,7 @@ def value_less_than_prob(distribution: probability_distribution, probability: fl
     '''
 
     return distribution.ppf(probability)
-
+#----------------------------------------------------------------------------
 def prob_greater_than_value(distribution: probability_distribution, value: float) -> float:
     '''
     Returns the probability that the distribution will randomly generate a value greater than
@@ -70,7 +105,7 @@ def prob_greater_than_value(distribution: probability_distribution, value: float
     '''
 
     return distribution.sf(value)
-
+#----------------------------------------------------------------------------
 def value_greater_than_prob(distribution: probability_distribution, probability: float) -> float:
     '''
     Given the probability of generating a random value greater than some value n, returns
@@ -81,7 +116,7 @@ def value_greater_than_prob(distribution: probability_distribution, probability:
     '''
 
     return distribution.isf(probability)
-    
+#----------------------------------------------------------------------------    
 def evaluate_hypothesis(p: float, alpha: float = 0.05, output: bool = True) -> bool:
     '''
     Compare the p value to the established alpha value to determine if the null hypothesis
@@ -96,7 +131,8 @@ def evaluate_hypothesis(p: float, alpha: float = 0.05, output: bool = True) -> b
         if output:
             print('\nFail to Reject H0')
         return True
-
+#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 ## CHI-SQUARED TEST FUNCTION
 
 def chi2_test(data_for_category1, data_for_category2, alpha=.05):
@@ -128,7 +164,8 @@ def chi2_test(data_for_category1, data_for_category2, alpha=.05):
     
     # evaluate the hypothesis against the established alpha value
     evaluate_hypothesis(p, alpha)
-
+#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 # PEARSONR CORRELATION TEST FUNCTION
 
 def correlation_test(data_for_category1, data_for_category2, alpha = 0.05):
@@ -148,7 +185,7 @@ def correlation_test(data_for_category1, data_for_category2, alpha = 0.05):
 
     # evaluate the hypothesis against the established alpha value
     evaluate_hypothesis(p, alpha)
-
+#----------------------------------------------------------------------------
 def equal_var_test(*args, alpha: float = 0.05) -> bool:
     '''
     Given two or more subgroups from a dataset, conducts a test of equal variance and returns whether or
@@ -157,7 +194,7 @@ def equal_var_test(*args, alpha: float = 0.05) -> bool:
 
     f, p = stats.levene(*args)
     return evaluate_hypothesis(p, alpha, output = False)
-
+#----------------------------------------------------------------------------
 def central_limit_theorem_test(*args, n_clt: int = 30) -> bool:
     '''
     Given two or more subgroups from a dataset, determines whether or not we have large enough sample
@@ -166,7 +203,7 @@ def central_limit_theorem_test(*args, n_clt: int = 30) -> bool:
 
     sample_sizes = [arg.size for arg in args]
     return min(sample_sizes) >= n_clt
-
+#----------------------------------------------------------------------------
 def two_sample_ttest(
     sample1: pd.core.series.Series,
     sample2: pd.core.series.Series,
@@ -224,7 +261,7 @@ def two_sample_ttest(
         f, p = stats.mannwhitneyu(sample1, sample2, alternative = alternative)
 
     evaluate_hypothesis(p, alpha)
-
+#----------------------------------------------------------------------------
 def anova_test(*args, alpha: float = 0.05, n_clt: int = 30) -> None:
     '''
     Given three or more subgroups from a dataset, conducts an ANOVA test to compare means and outputs
@@ -269,3 +306,11 @@ def anova_test(*args, alpha: float = 0.05, n_clt: int = 30) -> None:
         f, p = stats.kruskal(*args)
 
     evaluate_hypothesis(p, alpha)
+    
+    
+# # #   .-')           .-')           .-')           .-')           
+# # # _(  OO)        _(  OO)        _(  OO)        _(  OO)          
+# # # ,------. (`-. (,------. (`-. (,------. (`-. (,------. (`-.    
+# # # '------'(OO  )_'------'(OO  )_'------'(OO  )_'------'(OO  )_  
+# # #        ,------.)      ,------.)      ,------.)      ,------.) 
+# # #        `------'       `------'       `------'       `------'  
