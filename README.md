@@ -18,4 +18,6 @@ This repository will give some cursory stats gleanings. Basic descriptive statis
 - Write python code that simulates experiments in order to calculate an experimental probability
 - Use various statistical distributions in python through scipy.stats
 - Perform hypothesis testing in python code
+
+
 ***
